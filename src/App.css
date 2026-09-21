@@ -1,3 +1,5 @@
+
+
 * {
   box-sizing: border-box;
 }
@@ -9,6 +11,8 @@ body {
 
 .app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
@@ -57,6 +61,7 @@ body {
   width: min(1180px, 92%);
   margin: 40px auto;
   min-height: 70vh;
+  flex: 1;
 }
 
 .page {
@@ -66,13 +71,132 @@ body {
   box-shadow: 0 4px 12px rgb(0 0 0 / 7%);
 }
 
+/* Remove the normal card spacing when displaying the homepage */
+.main-content:has(.hero) {
+  width: 100%;
+  margin: 0;
+  min-height: 0;
+  display: flex;
+}
+
+/* Full-screen homepage design */
 .hero {
-  text-align: center;
-  padding: 60px 35px;
+  flex: 1;
+  width: 100%;
+  min-height: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: clamp(60px, 10vw, 160px);
+
+  /* Remove the normal white page-card appearance */
+  border-radius: 0;
+  box-shadow: none;
+
+  color: white;
+  background-color: #0d1428;
+
+  background-image:
+    radial-gradient(
+      circle at 25% 50%,
+      rgba(108, 92, 231, 0.38),
+      transparent 38%
+    ),
+    linear-gradient(
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    auto,
+    18px 18px,
+    18px 18px;
+}
+
+/* Large, highly visible homepage title */
+.hero h1 {
+  max-width: 1000px;
+  margin: 0 0 50px;
+
+  color: #ffffff;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+
+  text-shadow:
+    0 4px 25px rgba(0, 0, 0, 0.35),
+    0 0 35px rgba(108, 92, 231, 0.22);
+}
+
+/* Only controls the underline */
+.hero_name {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+
+  text-decoration-line: underline;
+  text-decoration-color: #2e74cf;
+  text-decoration-thickness: 6px;
+  text-underline-offset: 10px;
+}
+
+.hero h1 {
+  max-width: 900px;
+  margin: 0 0 50px; 
+
+  }
+    .hero h1 span {
+     max-width: 900px;
+     margin: 0 0 50px; 
+     text-decoration-line: underline;
+     text-decoration-color: #2e74cf;
+ 
+  
+
+  color: #ffffff;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+
+  text-shadow:
+    0 4px 25px rgba(0, 0, 0, 0.35),
+    0 0 35px rgba(108, 92, 231, 0.22);
+}
+
+/* Make the mission heading more distinctive */
+.hero h3 {
+  max-width: 850px;
+  margin: 28px 0 10px;
+
+  color: #2e74cf;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+/* Brighter and more readable homepage paragraphs */
+.hero p {
+  max-width: 850px;
+  margin: 0 0 15px;
+
+  color: #d9deeb;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.75;
 }
 
 h1 {
-  color: #111827;
+  color: #fcfcfc;
   margin-top: 0;
 }
 
@@ -396,6 +520,281 @@ a {
 .muted {
   color: #64748b;
 }
+/* Let the Projects page fill the complete content area */
+.main-content:has(.projects-page) {
+  width: 100%;
+  margin: 0;
+  min-height: 0;
+  display: flex;
+}
+
+/* Main Projects page */
+.projects-page {
+  flex: 1;
+  width: 100%;
+  min-height: 650px;
+  padding: clamp(55px, 7vw, 110px);
+
+  border-radius: 0;
+  box-shadow: none;
+
+  color: white;
+  background-color: #0d1428;
+
+  background-image:
+    radial-gradient(
+      circle at 20% 45%,
+      rgba(108, 92, 231, 0.23),
+      transparent 38%
+    ),
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    auto,
+    18px 18px,
+    18px 18px;
+}
+
+.projects-heading {
+  max-width: 750px;
+  margin-bottom: 42px;
+}
+
+.project-label {
+  margin: 0 0 10px;
+  color: #8b7cff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.projects-heading h1,
+.project-detail-heading h1 {
+  margin: 0 0 18px;
+  color: white;
+  font-size: clamp(2.5rem, 5vw, 4.3rem);
+  line-height: 1.05;
+}
+
+.projects-heading > p:last-child,
+.project-detail-heading > p {
+  color: #b7c0d4;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+/* Three-card project-selection screen */
+.project-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.project-selection-card {
+  min-height: 340px;
+  padding: 28px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border: 1px solid #34415f;
+  border-radius: 15px;
+
+  color: white;
+  text-align: left;
+  background: rgba(20, 29, 51, 0.94);
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.project-selection-card:hover {
+  transform: translateY(-6px);
+  border-color: #8172ff;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+}
+
+.project-number {
+  margin-bottom: 45px;
+  color: #8b7cff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.project-selection-card h2 {
+  margin: 0 0 15px;
+  color: white;
+  font-size: 1.55rem;
+}
+
+.project-selection-card p {
+  margin: 0 0 22px;
+  color: #aeb8cc;
+  line-height: 1.65;
+}
+
+.project-card-technologies,
+.technology-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-card-technologies {
+  margin-top: auto;
+}
+
+.project-card-technologies span,
+.technology-list span {
+  padding: 6px 10px;
+
+  border: 1px solid rgba(139, 124, 255, 0.35);
+  border-radius: 100px;
+
+  color: #c8c1ff;
+  background: rgba(108, 92, 231, 0.12);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.project-view-text {
+  margin-top: 25px;
+  color: #9c8fff;
+  font-weight: 800;
+}
+
+/* Selected project screen */
+.project-detail {
+  max-width: 1350px;
+  margin: 0 auto;
+  animation: revealProject 0.28s ease;
+}
+
+.project-back-button {
+  margin-bottom: 35px;
+  padding: 0;
+
+  border: none;
+  color: #a99fff;
+  background: transparent;
+
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.project-back-button:hover {
+  color: white;
+}
+
+.project-detail-heading {
+  max-width: 900px;
+  margin-bottom: 42px;
+}
+
+.technology-list {
+  margin-top: 22px;
+}
+
+.project-detail-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(340px, 0.85fr);
+
+  gap: 32px;
+  align-items: start;
+}
+
+/* Video */
+.project-video-container {
+  overflow: hidden;
+  border: 1px solid #3b496b;
+  border-radius: 16px;
+  background: #070c18;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
+}
+
+.project-video-container video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #070c18;
+}
+
+/* Written project information */
+.project-information {
+  display: grid;
+  gap: 24px;
+
+  padding: 28px;
+  border: 1px solid #34415f;
+  border-radius: 16px;
+
+  background: rgba(20, 29, 51, 0.94);
+}
+
+.project-information h2 {
+  margin: 0 0 8px;
+  color: white;
+  font-size: 1.15rem;
+}
+
+.project-information p {
+  margin: 0;
+  color: #adb7cc;
+  line-height: 1.65;
+}
+
+.project-link-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.project-primary-link,
+.project-secondary-link {
+  padding: 12px 17px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.project-primary-link {
+  color: white;
+  background: #6858ed;
+}
+
+.project-secondary-link {
+  border: 1px solid #65708b;
+  color: white;
+  background: transparent;
+}
+
+@keyframes revealProject {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @media (max-width: 850px) {
   .admin-dashboard {
@@ -420,6 +819,27 @@ a {
     flex-direction: column;
     gap: 16px;
     padding-inline: 20px;
+
+    .project-selection-grid,
+    .project-detail-layout {
+    grid-template-columns: 1fr;
+
+    .projects-page {
+  padding: 55px 22px;
+}
+
+.project-selection-card {
+  min-height: 290px;
+}
+
+.project-detail-heading {
+  margin-bottom: 30px;
+}
+
+.project-information {
+  padding: 21px;
+}
+}
   }
 
   .nav-links {
@@ -441,4 +861,12 @@ a {
   .full-width {
     grid-column: auto;
   }
+  .hero {
+  min-height: 580px;
+  padding: 65px 24px;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 12vw, 4rem);
+}
 }

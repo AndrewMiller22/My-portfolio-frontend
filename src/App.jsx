@@ -59,9 +59,9 @@ function Navbar({ setCurrentPage }) {
         <button onClick={() => setCurrentPage("about")}>About Me</button>
         <button onClick={() => setCurrentPage("projects")}>Projects</button>
         <button onClick={() => setCurrentPage("services")}>Services</button>
-        <button onClick={() => setCurrentPage("references")}>References</button>
+   
         <button onClick={() => setCurrentPage("contact")}>Contact Me</button>
-        <button onClick={() => setCurrentPage("admin")}>Admin</button>
+        
       </div>
     </nav>
   );
@@ -71,10 +71,10 @@ function Navbar({ setCurrentPage }) {
 function Home() {
   return (
     <section className="page hero">
-      <h1>Welcome to My Personal Portfolio</h1>
+      <h1>Hey, I'm <span className="hero_name">Andrew Miller.</span></h1>
 
       <p>
-        My name is Andrew Miller, and this portfolio highlights some of my software
+        I'm a Software Engineer and this portfolio highlights some of my software
         development skills, projects, services, and professional goals.
       </p>
 
@@ -85,7 +85,7 @@ function Home() {
 
       <h3>Mission Statement</h3>
       <p>
-        My goal and passion is to create full stack projects towards financies, crypto technology, and business solutions.
+        My goal and passion is to create full stack projects towards finance, crypto technology, and business solutions.
       </p>
     </section>
   );
@@ -110,7 +110,7 @@ function About() {
             I enjoy learning how websites and applications are built because it
             allows me to turn ideas into real working systems. I am currently
             improving my skills in Python, React, JavaScript, HTML, CSS, Java, SQL, and
-            software design.
+            software design. I do plan on picking up C++ starting September 2026 to truly expand my possibilities.
           </p>
 
           <p>
@@ -118,7 +118,7 @@ function About() {
             applications for businesses, customers, crypto, and personal projects.
           </p>
 
-          <a href="/Resume-2.pdf" target="_blank" rel="noopener noreferrer">
+          <a href="/andrew-miller-resume.pdf" target="_blank" rel="noopener noreferrer">
             View My Resume
           </a>
         </div>
@@ -129,92 +129,227 @@ function About() {
 
 /* Projects page component */
 function Projects() {
-  const [visibleProjectImages, setVisibleProjectImages] = useState(null);
+  // null means the project-selection screen is displayed.
+  // When a card is clicked, this stores the selected project.
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const projects = [
     {
+      id: 1,
       title: "Financial Tracker App",
+
+      shortDescription:
+        "A financial application for tracking spending, setting goals, and reviewing financial progress.",
+
       description:
-        "A financial application concept that helps users track spending, set goals, and review reports over 3-month, 6-month, and 12-month periods.",
-      role: "I planned the requirements, use cases, and user stories for the system.",
+        "The Financial Tracker helps users understand their spending habits, create savings goals, and review reports across different time periods.",
+
+      role:
+        "I planned the application requirements, use cases, user stories, account-management flow, and financial-tracking features.",
+
+      challenge:
+        "The main challenge was organizing several financial features into a system that remained understandable and easy to navigate.",
+
       outcome:
-        "This project helped me understand how software can support better financial habits.",
-      images: [],
+        "This project strengthened my understanding of application planning, financial software, use cases, and system design.",
+
+      technologies: ["React", "JavaScript", "Node.js", "MongoDB"],
+
+      video: "/videos/financial-tracker-demo.mp4",
+
+      // Add the real links when available.
+      liveUrl: "",
+      githubUrl: ""
     },
+
     {
+      id: 2,
       title: "PC Parts Price Comparison Tool",
+
+      shortDescription:
+        "A browser-based tool for comparing PC-part prices and planning compatible computer builds.",
+
       description:
-        "A browser extension idea that compares PC part prices and helps users build compatible computers based on their budget.",
-      role: "I worked on the idea, frontend structure, search logic, and backend API planning.",
+        "This application helps users compare computer-component prices while considering compatibility and their overall budget.",
+
+      role:
+        "I worked on the project idea, frontend structure, product-search logic, and backend API planning.",
+
+      challenge:
+        "The main challenge was organizing product information from different sources and presenting useful comparisons clearly.",
+
       outcome:
-        "This project helped me practice JavaScript, APIs, and problem-solving for real users.",
-      images: ["/browser-extension-1.png", "/browser-extension-2.png"],
+        "This project helped me practise JavaScript, API planning, search functionality, and problem-solving for real users.",
+
+      technologies: ["JavaScript", "Browser APIs", "HTML", "CSS"],
+
+      video: "/videos/pc-parts-demo.mp4",
+      liveUrl: "",
+      githubUrl: ""
     },
+
     {
+      id: 3,
       title: "Pressure Washing Quote Calculator",
+
+      shortDescription:
+        "A quote-calculation application that generates service estimates based on customer selections.",
+
       description:
-        "A web-based quote calculator that allows customers to choose a service and enter square footage to receive a price estimate.",
-      role: "I planned the service options, pricing logic, and customer information flow.",
+        "Customers select a pressure-washing service, provide the required measurements, and receive an estimated price.",
+
+      role:
+        "I planned the service options, pricing calculations, customer-information flow, and quote-generation process.",
+
+      challenge:
+        "The main challenge was translating real service-pricing rules into consistent application logic.",
+
       outcome:
-        "This project connected my software skills with a real local service business idea.",
-      images: [],
-    },
+        "This project connected my software-development skills with a practical local service-business problem.",
+
+      technologies: ["React", "JavaScript", "CSS"],
+
+      video: "/videos/pressure-washing-demo.mp4",
+      liveUrl: "",
+      githubUrl: ""
+    }
   ];
 
-  function toggleImages(index) {
-    if (visibleProjectImages === index) {
-      setVisibleProjectImages(null);
-    } else {
-      setVisibleProjectImages(index);
-    }
+  // Display the full view when a project has been selected.
+  if (selectedProject) {
+    return (
+      <section className="page projects-page">
+        <div className="project-detail">
+          <button
+            type="button"
+            className="project-back-button"
+            onClick={() => setSelectedProject(null)}
+          >
+            ← Back to Projects
+          </button>
+
+          <div className="project-detail-heading">
+            <p className="project-label">FEATURED PROJECT</p>
+
+            <h1>{selectedProject.title}</h1>
+
+            <p>{selectedProject.shortDescription}</p>
+
+            <div className="technology-list">
+              {selectedProject.technologies.map((technology) => (
+                <span key={technology}>{technology}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="project-detail-layout">
+            <div className="project-video-container">
+              <video controls preload="metadata">
+                <source
+                  src={selectedProject.video}
+                  type="video/mp4"
+                />
+
+                Your browser does not support HTML video.
+              </video>
+            </div>
+
+            <div className="project-information">
+              <div>
+                <h2>About the Project</h2>
+                <p>{selectedProject.description}</p>
+              </div>
+
+              <div>
+                <h2>My Contribution</h2>
+                <p>{selectedProject.role}</p>
+              </div>
+
+              <div>
+                <h2>Technical Challenge</h2>
+                <p>{selectedProject.challenge}</p>
+              </div>
+
+              <div>
+                <h2>Outcome</h2>
+                <p>{selectedProject.outcome}</p>
+              </div>
+
+              <div className="project-link-buttons">
+                {selectedProject.liveUrl && (
+                  <a
+                    href={selectedProject.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-primary-link"
+                  >
+                    Open Live Demo
+                  </a>
+                )}
+
+                {selectedProject.githubUrl && (
+                  <a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-secondary-link"
+                  >
+                    View Source Code
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 
+  // Display all project cards when selectedProject is null.
   return (
-    <section className="page">
-      <h1>Projects</h1>
+    <section className="page projects-page">
+      <div className="projects-heading">
+        <p className="project-label">MY WORK</p>
 
-      <div className="card-grid">
-        {projects.map((project, index) => (
-          <article className="card" key={index}>
+        <h1>Featured Projects</h1>
+
+        <p>
+          Select a project to watch its demonstration and explore the
+          decisions behind its development.
+        </p>
+      </div>
+
+      <div className="project-selection-grid">
+        {projects.map((project) => (
+          <button
+            type="button"
+            className="project-selection-card"
+            key={project.id}
+            onClick={() => setSelectedProject(project)}
+          >
+            <span className="project-number">
+              {String(project.id).padStart(2, "0")}
+            </span>
+
             <h2>{project.title}</h2>
 
-            <h3>Description</h3>
-            <p>{project.description}</p>
+            <p>{project.shortDescription}</p>
 
-            <h3>My Role</h3>
-            <p>{project.role}</p>
+            <div className="project-card-technologies">
+              {project.technologies.slice(0, 3).map((technology) => (
+                <span key={technology}>{technology}</span>
+              ))}
+            </div>
 
-            <h3>Outcome</h3>
-            <p>{project.outcome}</p>
-
-            {project.images.length > 0 && (
-              <button
-                className="image-toggle-button"
-                onClick={() => toggleImages(index)}
-              >
-                {visibleProjectImages === index ? "Hide Images" : "View Images"}
-              </button>
-            )}
-
-            {visibleProjectImages === index && (
-              <div className="project-images">
-                {project.images.map((image, imageIndex) => (
-                  <img
-                    key={imageIndex}
-                    src={image}
-                    alt={`${project.title} screenshot ${imageIndex + 1}`}
-                  />
-                ))}
-              </div>
-            )}
-          </article>
+            <span className="project-view-text">
+              View Project →
+            </span>
+          </button>
         ))}
       </div>
     </section>
   );
 }
-
-
 /* Services page component */
 function Services() {
   const services = [
