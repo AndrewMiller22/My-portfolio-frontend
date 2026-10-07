@@ -521,7 +521,8 @@ a {
   color: #64748b;
 }
 /* Let the Projects page fill the complete content area */
-.main-content:has(.projects-page) {
+.main-content:has(.projects-page),
+.main-content:has(.themed-page) {
   width: 100%;
   margin: 0;
   min-height: 0;
@@ -529,7 +530,8 @@ a {
 }
 
 /* Main Projects page */
-.projects-page {
+.projects-page,
+.themed-page {
   flex: 1;
   width: 100%;
   min-height: 650px;
@@ -869,4 +871,97 @@ a {
 .hero h1 {
   font-size: clamp(2.6rem, 12vw, 4rem);
 }
+}
+
+/* Shared blue theme for About and Contact. */
+.themed-page > h1 {
+  font-size: clamp(2.5rem, 5vw, 4.3rem);
+  margin-bottom: 28px;
+}
+.themed-page .about-card,
+.themed-page .contact-form { max-width: 850px; }
+.themed-page p { color: #d9deeb; line-height: 1.75; }
+.themed-page a { color: #93c5fd; }
+.themed-page .contact-form input,
+.themed-page .contact-form textarea {
+  background: #141d33;
+  color: #fff;
+  border-color: #65708b;
+}
+.themed-page input:focus-visible,
+.themed-page textarea:focus-visible,
+.project-selection-card:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+.themed-page .error-message { color: #fca5a5; }
+.themed-page .success-message { color: #86efac; }
+.project-thumbnail {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 22px;
+  background: #070c18;
+}
+.project-selection-card:has(.project-thumbnail) .project-number {
+  margin-bottom: 18px;
+}
+.project-detail-image { display: block; width: 100%; height: auto; }
+/* Keep project cards and details readable on smaller screens. */
+@media (max-width: 850px) {
+  .project-selection-grid, .project-detail-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .projects-page, .themed-page { padding: 55px 22px; }
+}
+
+/* Portrait is framed using CSS so the original photo remains unchanged. */
+.themed-page .about-intro {
+  max-width: 1120px;
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+.about-portrait {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid #65708b;
+  border-radius: 18px;
+  background: #141d33;
+}
+.about-portrait img {
+  position: absolute;
+  width: 240%;
+  max-width: none;
+  height: auto;
+  left: -125%;
+  top: -4%;
+}
+.about-team-photo {
+  max-width: 800px;
+  margin: 48px 0 0;
+  padding: 14px;
+  border: 1px solid #34415f;
+  border-radius: 18px;
+  background: #141d33;
+}
+.about-team-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.about-team-photo figcaption {
+  padding: 14px 4px 2px;
+  color: #d9deeb;
+  line-height: 1.6;
+}
+@media (max-width: 700px) {
+  .themed-page .about-intro { grid-template-columns: minmax(0, 1fr); }
+  .about-portrait { width: min(100%, 340px); }
+  .about-team-photo { margin-top: 32px; }
 }

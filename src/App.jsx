@@ -58,7 +58,9 @@ function Navbar({ setCurrentPage }) {
         <button onClick={() => setCurrentPage("home")}>Home</button>
         <button onClick={() => setCurrentPage("about")}>About Me</button>
         <button onClick={() => setCurrentPage("projects")}>Projects</button>
+        {/* Services is temporarily hidden. Uncomment to restore it.
         <button onClick={() => setCurrentPage("services")}>Services</button>
+        */}
    
         <button onClick={() => setCurrentPage("contact")}>Contact Me</button>
         
@@ -75,7 +77,7 @@ function Home() {
 
       <p>
         I'm a Software Engineer and this portfolio highlights some of my software
-        development skills, projects, services, and professional goals.
+        development skills, projects, and professional goals.
       </p>
 
       <p>
@@ -94,10 +96,13 @@ function Home() {
 /* About Me page component */
 function About() {
   return (
-    <section className="page">
+    <section className="page themed-page">
       <h1>About Me</h1>
 
-      <div className="about-card">
+      <div className="about-card about-intro">
+        <div className="about-portrait">
+          <img src="/images/andrew-portrait.png" alt="Andrew Miller" />
+        </div>
         <div>
           <h2>Andrew Miller</h2>
 
@@ -123,6 +128,15 @@ function About() {
           </a>
         </div>
       </div>
+
+      <figure className="about-team-photo">
+        <img
+          src="/images/centennial-hacks-team.jpg"
+          alt="Our team at Centennial Hacks with our project displayed on a laptop"
+          loading="lazy"
+        />
+        <figcaption>With my team at Centennial Hacks.</figcaption>
+      </figure>
     </section>
   );
 }
@@ -136,29 +150,31 @@ function Projects() {
   const projects = [
     {
       id: 1,
-      title: "Financial Tracker App",
+      title: "SnapSell Marketplace",
 
       shortDescription:
-        "A financial application for tracking spending, setting goals, and reviewing financial progress.",
+        "A local marketplace app for buying and selling items.",
 
       description:
-        "The Financial Tracker helps users understand their spending habits, create savings goals, and review reports across different time periods.",
+        "Easy to create a list items for sale, services will be added in future patches also",
 
       role:
-        "I planned the application requirements, use cases, user stories, account-management flow, and financial-tracking features.",
+        "I organized the work, created the backend functions. Connected the to database, tested all features from beginning stages to end plus a lot of the u design.",
 
       challenge:
-        "The main challenge was organizing several financial features into a system that remained understandable and easy to navigate.",
+        "UI design, fixing bugs towards the messaging systems.",
 
       outcome:
-        "This project strengthened my understanding of application planning, financial software, use cases, and system design.",
+        "This project strengthened my understanding of application planning, design and understanding of nonsql databases. I also learned how to implement a messaging system and how to connect the backend to the frontend and work as a leader ",
 
       technologies: ["React", "JavaScript", "Node.js", "MongoDB"],
 
-      video: "/videos/financial-tracker-demo.mp4",
+      thumbnail: "/images/snapsell-thumbnail.png",
+      // Set to "/videos/snapsell-demo.mp4" after adding your recording.
+      video: "",
 
       // Add the real links when available.
-      liveUrl: "",
+      liveUrl: "https://snap-sell-marketplace.vercel.app/",
       githubUrl: ""
     },
 
@@ -244,7 +260,8 @@ function Projects() {
 
           <div className="project-detail-layout">
             <div className="project-video-container">
-              <video controls preload="metadata">
+              {selectedProject.video ? (
+              <video controls preload="metadata" poster={selectedProject.thumbnail}>
                 <source
                   src={selectedProject.video}
                   type="video/mp4"
@@ -252,6 +269,13 @@ function Projects() {
 
                 Your browser does not support HTML video.
               </video>
+              ) : selectedProject.thumbnail ? (
+                <img
+                  className="project-detail-image"
+                  src={selectedProject.thumbnail}
+                  alt={`${selectedProject.title} homepage and recent listings`}
+                />
+              ) : null}
             </div>
 
             <div className="project-information">
@@ -327,6 +351,14 @@ function Projects() {
             key={project.id}
             onClick={() => setSelectedProject(project)}
           >
+            {project.thumbnail && (
+              <img
+                className="project-thumbnail"
+                src={project.thumbnail}
+                alt={`${project.title} preview`}
+                loading="lazy"
+              />
+            )}
             <span className="project-number">
               {String(project.id).padStart(2, "0")}
             </span>
@@ -467,7 +499,7 @@ function Contact() {
   }
 
   return (
-    <section className="page">
+    <section className="page themed-page">
       <h1>Contact Me</h1>
 
       <p>Email: andrewmiller_1@outlook.com</p>
